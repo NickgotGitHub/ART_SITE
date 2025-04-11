@@ -359,6 +359,13 @@
       </section>
     <!-- End Card Stack Scene -->
 
+    <!-- Add View Full Image button to card scene -->
+    <div style="text-align: center; margin: 20px 0;">
+      <button id="view-full-artwork" class="caps font-bold" style="background-color: var(--color-accent); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+        View Full Artwork
+      </button>
+    </div>
+
     <!-- Stickers Section -->
     <section class="stickers" style="background-color: #fffdd3; color: #000; padding: 2rem; text-align: center;">
       <h2 class="large-heading caps font-bold" style="color: #000; margin-bottom: 1rem;">Stickers for Sale</h2>
@@ -367,32 +374,125 @@
         <p class="large-body caps font-bold">Contact us on WhatsApp:</p>
         <a href="https://wa.me/8768314473" target="_blank" class="large-body font-bold" style="color: #fff; text-decoration: none;">876-831-4473</a>
       </div>
+      
+      <!-- Sticker Showcase -->
+      <div class="sticker-showcase" style="position: relative; height: 400px; margin-top: 2rem; overflow: hidden;">
+        <!-- Sticker Items with fun positioning and rotation -->
+        <div class="sticker-item" style="position: absolute; top: 40px; left: 10%; transform: rotate(-15deg); width: 150px; cursor: pointer;">
+          <img src="stickers/plush_toy_octopus.png" alt="Plush Toy Octopus Sticker" style="width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px;">
+        </div>
+        <div class="sticker-item" style="position: absolute; top: 100px; left: 35%; transform: rotate(10deg); width: 180px; cursor: pointer;">
+          <img src="stickers/Bag2.png" alt="Bag Sticker" style="width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px;">
+        </div>
+        <div class="sticker-item" style="position: absolute; top: 50px; right: 15%; transform: rotate(-8deg); width: 160px; cursor: pointer;">
+          <img src="stickers/bagpack.png" alt="Backpack Sticker" style="width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px;">
+        </div>
+        <div class="sticker-item" style="position: absolute; bottom: 60px; left: 25%; transform: rotate(5deg); width: 140px; cursor: pointer;">
+          <img src="stickers/vaseline.png" alt="Vaseline Sticker" style="width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px;">
+        </div>
+        <div class="sticker-item" style="position: absolute; bottom: 40px; right: 25%; transform: rotate(-12deg); width: 170px; cursor: pointer;">
+          <img src="stickers/chill_guy_in_glasses.png" alt="Chill Guy in Glasses Sticker" style="width: 100%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 10px;">
+        </div>
+      </div>
     </section>
 
+    <!-- Modal for full-size sticker view -->
+    <div id="sticker-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
+      <div style="position: relative; max-width: 90%; max-height: 90%;">
+        <img id="sticker-modal-img" src="" alt="Full size sticker" style="max-width: 100%; max-height: 90vh; border-radius: 10px;">
+        <button id="close-sticker-modal" style="position: absolute; top: -40px; right: -40px; background: white; border: none; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">X</button>
+      </div>
+    </div>
+
+    <!-- Modal for full-size artwork view -->
+    <div id="artwork-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; flex-direction: column;">
+      <div style="position: relative; max-width: 90%; max-height: 80%;">
+        <img id="artwork-modal-img" src="" alt="Full size artwork" style="max-width: 100%; max-height: 80vh; border-radius: 10px;">
+        <button id="close-artwork-modal" style="position: absolute; top: -40px; right: -40px; background: white; border: none; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">X</button>
+      </div>
+      <div id="artwork-modal-contact" style="background-color: var(--color-accent); color: white; padding: 2rem; border-radius: 1rem; margin-top: 20px; max-width: 400px; text-align: center;">
+        <p class="large-body caps font-bold" style="margin-bottom: 1rem;">
+          Interested in this piece?
+        </p>
+        <a href="https://wa.me/8768314473" target="_blank" style="color: white; text-decoration: none; font-size: 1.5rem;">
+          Contact me: 876-831-4473
+        </a>
+      </div>
+    </div>
+
     <script>
-      // Get the scene and all card elements
-      const scene = document.querySelector('.scene');
-      let cards = Array.from(document.querySelectorAll('.card'));
-      const total = cards.length;
-      const middle = Math.floor(total / 2);
+    // Get the scene and all card elements
+    const scene = document.querySelector('.scene');
+    let cards = Array.from(document.querySelectorAll('.card'));
+    const total = cards.length;
+    const middle = Math.floor(total / 2);
 
-      // Update positions for a stacked effect with slight vertical offsets and rotations
-      function updateCards() {
-        cards.forEach((card, i) => {
-          const offset = i - middle;
-          card.style.transform = `translateY(${offset * 20}px) rotate(${offset * 5}deg)`;
-          card.style.zIndex = total - i;
-        });
-      }
-
-      updateCards();
-
-      // On click anywhere in the scene, cycle the top card to the back
-      scene.addEventListener('click', () => {
-        const first = cards.shift();
-        cards.push(first);
-        updateCards();
+    // Update positions for a stacked effect with slight vertical offsets and rotations
+    function updateCards() {
+      cards.forEach((card, i) => {
+        const offset = i - middle;
+        card.style.transform = `translateY(${offset * 20}px) rotate(${offset * 5}deg)`;
+        card.style.zIndex = total - i;
       });
+    }
+
+    updateCards();
+
+    // On click anywhere in the scene, cycle the top card to the back
+    scene.addEventListener('click', () => {
+      const first = cards.shift();
+      cards.push(first);
+      updateCards();
+    });
+
+    // Sticker modal functionality
+    const stickerItems = document.querySelectorAll('.sticker-item');
+    const stickerModal = document.getElementById('sticker-modal');
+    const stickerModalImg = document.getElementById('sticker-modal-img');
+    const closeSticker = document.getElementById('close-sticker-modal');
+
+    stickerItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const imgSrc = this.querySelector('img').src;
+        stickerModalImg.src = imgSrc;
+        stickerModal.style.display = 'flex';
+      });
+    });
+
+    closeSticker.addEventListener('click', function() {
+      stickerModal.style.display = 'none';
+    });
+
+    // Artwork full view functionality
+    const viewFullArtworkBtn = document.getElementById('view-full-artwork');
+    const artworkModal = document.getElementById('artwork-modal');
+    const artworkModalImg = document.getElementById('artwork-modal-img');
+    const closeArtwork = document.getElementById('close-artwork-modal');
+    
+    viewFullArtworkBtn.addEventListener('click', function() {
+      // Get the currently visible card (top of the stack)
+      const visibleCard = cards[0];
+      const imgSrc = visibleCard.querySelector('img').src;
+      const accentColor = window.getComputedStyle(document.querySelector('.homepage-header')).getPropertyValue('--color-accent');
+      
+      artworkModalImg.src = imgSrc;
+      document.getElementById('artwork-modal-contact').style.backgroundColor = accentColor;
+      artworkModal.style.display = 'flex';
+    });
+
+    closeArtwork.addEventListener('click', function() {
+      artworkModal.style.display = 'none';
+    });
+
+    // Close modals when clicking outside
+    window.addEventListener('click', function(event) {
+      if (event.target === stickerModal) {
+        stickerModal.style.display = 'none';
+      }
+      if (event.target === artworkModal) {
+        artworkModal.style.display = 'none';
+      }
+    });
     </script>
 
   
