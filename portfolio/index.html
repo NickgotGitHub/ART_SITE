@@ -321,15 +321,60 @@
         /* Image fills most of the card leaving room for footer text */
       .card img {
         max-width: 100%;
-        max-height: calc(100% - 2rem);
+        max-height: calc(100% - 3rem); /* Increase space for text */
         border-radius: 0.75rem;
+        object-fit: contain; /* Ensure image fits properly */
       }
       /* Footer text at the bottom of each card */
       .card__footer {
-        font-size: 4rem; /* larger font size */
+        width: 100%; /* Full width to contain text */
+        font-size: 3rem; /* Smaller font size to fit better */
         font-weight: bold;
         color: inherit;
         margin-top: 0.5rem;
+        text-align: center; /* Center text */
+        white-space: nowrap; /* Keep text on one line */
+        overflow: hidden; /* Hide overflow */
+        text-overflow: ellipsis; /* Add ellipsis if too long */
+      }
+      
+      /* Mobile optimization for stickers section */
+      @media (max-width: 768px) {
+        .sticker-showcase {
+          height: 600px !important; /* Taller container for mobile */
+        }
+        
+        /* Reposition stickers for mobile view */
+        .sticker-item:nth-child(1) {
+          top: 30px !important;
+          left: 10% !important;
+          width: 120px !important;
+        }
+        
+        .sticker-item:nth-child(2) {
+          top: 170px !important;
+          left: 50% !important;
+          transform: translateX(-50%) rotate(10deg) !important;
+          width: 140px !important;
+        }
+        
+        .sticker-item:nth-child(3) {
+          top: 320px !important;
+          right: 10% !important;
+          width: 130px !important;
+        }
+        
+        .sticker-item:nth-child(4) {
+          bottom: 180px !important;
+          left: 15% !important;
+          width: 120px !important;
+        }
+        
+        .sticker-item:nth-child(5) {
+          bottom: 40px !important;
+          right: 15% !important;
+          width: 130px !important;
+        }
       }
       </style>
 
