@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "portfolio/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/send-message",
+      "dest": "server.js"
+    },
+    {
+      "src": "/",
+      "dest": "portfolio/index.html"
+    },
+    {
+      "src": "/(.+)",
+      "dest": "portfolio/$1"
+    }
+  ]
+} 

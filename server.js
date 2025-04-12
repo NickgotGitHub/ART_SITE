@@ -58,13 +58,18 @@ Message: ${message}`;
         const accountSid = process.env.TWILIO_ACCOUNT_SID;
         const authToken = process.env.TWILIO_AUTH_TOKEN;
         const fromNumber = process.env.TWILIO_PHONE_NUMBER;
-        const toNumber = '+18768314473';
+        const toNumber = process.env.TO_PHONE_NUMBER;
+
+        // Mask sensitive information in logs
+        const maskedAccountSid = accountSid.substring(0, 6) + '...' + accountSid.slice(-4);
+        const maskedFromNumber = fromNumber.substring(0, 3) + '*'.repeat(fromNumber.length - 7) + fromNumber.slice(-4);
+        const maskedToNumber = toNumber.substring(0, 3) + '*'.repeat(toNumber.length - 7) + toNumber.slice(-4);
 
         console.log('Sending SMS with:');
-        console.log(`From: ${fromNumber}`);
-        console.log(`To: ${toNumber}`);
-        console.log(`Account SID: ${accountSid.substring(0, 10)}...`);
-        console.log(`Message: ${smsMessage}`);
+        console.log('From:', maskedFromNumber);
+        console.log('To:', maskedToNumber);
+        console.log('Account SID:', maskedAccountSid);
+        console.log('Message:', smsMessage);
 
         // Prepare the request data
         const data = qs.stringify({
