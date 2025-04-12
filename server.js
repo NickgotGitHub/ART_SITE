@@ -6,9 +6,13 @@ const qs = require('qs');
 
 const app = express();
 
-// Allow all origins for development
+// Allow specific origins for production
 app.use(cors({
-    origin: '*',
+    origin: [
+        'https://art-site-1lrai9avq-nickgotgithubs-projects.vercel.app', 
+        'https://www.edu-prep.com', 
+        'http://localhost:3000'
+    ],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

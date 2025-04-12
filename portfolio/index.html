@@ -793,7 +793,8 @@
                 try {
                     console.log('Attempting to send message with data:', formData);
                     
-                    const response = await fetch('http://localhost:3000/send-message', {
+                    // Send data to the server
+                    fetch('https://art-site-1lrai9avq-nickgotgithubs-projects.vercel.app/send-message', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
