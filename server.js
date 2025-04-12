@@ -9,8 +9,8 @@ const app = express();
 // Allow specific origins for production
 app.use(cors({
     origin: [
-        'https://art-site-1lrai9avq-nickgotgithubs-projects.vercel.app', 
-        'https://www.edu-prep.com', 
+        'https://artportfolio-6n78bekn2-nickgotgithubs-projects.vercel.app',
+        'https://www.edu-prep.com',
         'http://localhost:3000'
     ],
     methods: ['GET', 'POST'],
