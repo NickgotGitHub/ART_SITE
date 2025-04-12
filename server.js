@@ -64,10 +64,16 @@ Message: ${message}`;
         const fromNumber = process.env.TWILIO_PHONE_NUMBER;
         const toNumber = process.env.TO_PHONE_NUMBER;
 
-        // Mask sensitive information in logs
-        const maskedAccountSid = accountSid.substring(0, 6) + '...' + accountSid.slice(-4);
-        const maskedFromNumber = fromNumber.substring(0, 3) + '*'.repeat(fromNumber.length - 7) + fromNumber.slice(-4);
-        const maskedToNumber = toNumber.substring(0, 3) + '*'.repeat(toNumber.length - 7) + toNumber.slice(-4);
+        // Verify required variables are present
+        if (!accountSid || !authToken || !fromNumber || !toNumber) {
+            console.error('Missing required Twilio environment variables');
+            return res.status(500).json({ error: 'Server configuration error: Missing Twilio credentials' });
+        }
+
+        // Mask sensitive information in logs (check for existence first)
+        const maskedAccountSid = accountSid ? (accountSid.substring(0, 6) + '...' + accountSid.slice(-4)) : '[Not Set]';
+        const maskedFromNumber = fromNumber ? (fromNumber.substring(0, 3) + '*'.repeat(fromNumber.length - 7) + fromNumber.slice(-4)) : '[Not Set]';
+        const maskedToNumber = toNumber ? (toNumber.substring(0, 3) + '*'.repeat(toNumber.length - 7) + toNumber.slice(-4)) : '[Not Set]';
 
         console.log('Sending SMS with:');
         console.log('From:', maskedFromNumber);
