@@ -3,7 +3,10 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [".env*"]
+      }
     },
     {
       "src": "portfolio/**",
@@ -23,5 +26,8 @@
       "src": "/(.+)",
       "dest": "portfolio/$1"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 } 
