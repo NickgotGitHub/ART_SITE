@@ -61,6 +61,114 @@
     <link rel="icon" href="https://cydstumpel.nl/wp-content/uploads/2025/01/favicon-300x300.png" sizes="192x192">
     <link rel="apple-touch-icon" href="https://cydstumpel.nl/wp-content/uploads/2025/01/favicon-300x300.png">
     <meta name="msapplication-TileImage" content="https://cydstumpel.nl/wp-content/uploads/2025/01/favicon-300x300.png">
+    <style>
+        /* Chat Widget Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #8f30ff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .chat-button svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        .chat-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            display: none;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .chat-popup.active {
+            display: block;
+        }
+
+        .chat-header {
+            background: #8f30ff;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-chat {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .close-chat svg {
+            width: 24px;
+            height: 24px;
+            stroke: black;
+            stroke-width: 2px;
+        }
+
+        .chat-form {
+            padding: 20px;
+            background: #fffce8;
+        }
+
+        .chat-popup input,
+        .chat-popup textarea {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 16px;
+            background: white;
+        }
+
+        .chat-popup textarea {
+            height: 120px;
+            resize: none;
+            border-radius: 10px;
+        }
+
+        .chat-popup button[type="submit"] {
+            background: #8f30ff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .chat-popup button[type="submit"]:hover {
+            background: #7b28e0;
+        }
+    </style>
     </head>
 
     
@@ -78,7 +186,7 @@
                             <span class="sr-only">Copy email</span>
                             <svg viewBox="0 0 716 543" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" d="M75 72C75 32.2355 107.236 0 147 0H644C683.765 0 716 32.2355 716 72V396C716 435.765 683.765 468 644 468H641V473C641 511.66 609.66 543 571 543H70C31.3401 543 0 511.66 0 473V145C0 106.34 31.3401 75 70 75H75V72ZM75 115H70C53.4315 115 40 128.431 40 145V473C40 489.569 53.4315 503 70 503H571C587.569 503 601 489.569 601 473V468H147C107.235 468 75 435.764 75 396V115ZM115 72C115 66.1986 116.544 60.7578 119.243 56.0659C125.34 63.2175 133.081 72.2485 142.071 82.6308C165.049 109.167 196.235 144.593 228.995 180.057C261.686 215.447 296.238 251.195 325.888 278.216C340.671 291.687 354.659 303.38 366.859 311.826C372.951 316.043 379.009 319.74 384.805 322.45C390.267 325.004 397.189 327.5 404.544 327.5C411.93 327.5 418.841 324.986 424.287 322.403C430.051 319.67 436.037 315.946 442.026 311.712C454.016 303.233 467.683 291.51 482.07 278.026C510.931 250.979 544.42 215.208 576.045 179.811C607.739 144.338 637.859 108.904 660.036 82.3631C665.569 75.7413 670.611 69.6691 675.063 64.2833C675.675 66.7547 676 69.3395 676 72V396C676 413.673 661.673 428 644 428H147C129.327 428 115 413.673 115 396V72ZM158.136 40H643.239C639.077 45.0314 634.418 50.6391 629.341 56.7149C607.332 83.0546 577.517 118.128 546.216 153.161C514.847 188.272 482.282 223.007 454.717 248.84C440.892 261.797 428.753 272.107 418.932 279.052C414.015 282.529 410.093 284.864 407.146 286.262C405.9 286.853 405.042 287.173 404.527 287.343C403.991 287.171 403.081 286.839 401.747 286.215C398.706 284.794 394.673 282.431 389.626 278.938C379.547 271.96 367.062 261.619 352.831 248.651C324.454 222.791 290.816 188.032 258.377 152.915C226.006 117.872 195.122 82.7912 172.311 56.4471C167.143 50.479 162.392 44.9625 158.136 40Z"></path>
-    </svg>
+</svg>
                         </button>
                         <a href="lauki.jm@gmail.com">
                             lauki.jm@gmail.com
@@ -471,6 +579,32 @@
       </div>
     </div>
 
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-button" id="chatButton">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+            </svg>
+        </button>
+        <div class="chat-popup" id="chatPopup">
+            <div class="chat-header">
+                <button class="close-chat" id="closeChat">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="white" fill="none"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="chat-form">
+                <form id="chatForm">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <textarea id="chatMessage" name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
     // Get the scene and all card elements
     const scene = document.querySelector('.scene');
@@ -543,6 +677,154 @@
       if (event.target === artworkModal) {
         artworkModal.style.display = 'none';
       }
+    });
+
+    // Chat Widget JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        const initChatWidget = () => {
+            const elements = {
+                button: document.getElementById('chatButton'),
+                popup: document.getElementById('chatPopup'),
+                closeBtn: document.getElementById('closeChat'),
+                form: document.getElementById('chatForm'),
+                inputs: {
+                    name: document.getElementById('name'),
+                    email: document.getElementById('email'),
+                    message: document.getElementById('chatMessage')
+                }
+            };
+
+            // Debug log to verify message textarea is found
+            console.log('Message textarea found:', !!elements.inputs.message, 
+                         elements.inputs.message ? elements.inputs.message.id : 'not found');
+
+            // Check if all required elements exist
+            const missingElements = Object.entries(elements).filter(([key, value]) => {
+                if (key === 'inputs') {
+                    return Object.values(value).some(input => !input);
+                }
+                return !value;
+            });
+
+            if (missingElements.length > 0) {
+                console.error('Missing chat widget elements:', missingElements.map(([key]) => key));
+                return;
+            }
+
+            // Add event listeners
+            elements.button.addEventListener('click', () => {
+                elements.popup.classList.add('active');
+            });
+
+            elements.closeBtn.addEventListener('click', () => {
+                elements.popup.classList.remove('active');
+            });
+
+            elements.form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Get and validate form values
+                const formData = {};
+                let hasEmptyFields = false;
+                let hasMissingElements = false;
+                
+                // Force-check if message element exists, as a fallback
+                if (!elements.inputs.message) {
+                    console.log('Message input not found initially, trying direct access...');
+                    elements.inputs.message = document.getElementById('chatMessage');
+                    
+                    if (!elements.inputs.message) {
+                        console.error('Message textarea still not found after fallback');
+                        hasMissingElements = true;
+                    } else {
+                        console.log('Message found via fallback:', elements.inputs.message.id);
+                    }
+                }
+
+                Object.entries(elements.inputs).forEach(([key, input]) => {
+                    // Check if input is defined
+                    if (!input) {
+                        console.error(`Input element with key "${key}" is undefined`);
+                        hasMissingElements = true;
+                        return; // Skip this iteration
+                    }
+                    
+                    try {
+                        // Check if input.value exists and is a string before trying to trim it
+                        if (input.value === undefined || input.value === null) {
+                            console.error(`Input value for "${key}" is undefined or null`);
+                            hasMissingElements = true;
+                            return;
+                        }
+                        
+                        // Ensure value is a string before trimming
+                        const inputValue = String(input.value);
+                        const value = inputValue.trim();
+                        
+                        if (!value) {
+                            hasEmptyFields = true;
+                            input.classList.add('error');
+                        } else {
+                            input.classList.remove('error');
+                            formData[key] = value;
+                        }
+                    } catch (err) {
+                        console.error(`Error processing input "${key}":`, err);
+                        hasMissingElements = true;
+                    }
+                });
+
+                if (hasMissingElements) {
+                    alert('There was a problem with the form. Please try again later.');
+                    return;
+                }
+
+                if (hasEmptyFields) {
+                    alert('Please fill out all fields');
+                    return;
+                }
+
+                // Show loading state
+                const submitButton = elements.form.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.textContent;
+                submitButton.textContent = 'Sending...';
+                submitButton.disabled = true;
+
+                try {
+                    console.log('Attempting to send message with data:', formData);
+                    
+                    const response = await fetch('http://localhost:3000/send-message', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    console.log('Server response status:', response.status);
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        throw new Error(`Server responded with status ${response.status}: ${errorText}`);
+                    }
+
+                    const data = await response.json();
+                    console.log('Success response:', data);
+                    alert('Message sent successfully!');
+                    elements.form.reset();
+                    elements.popup.classList.remove('active');
+                } catch (error) {
+                    console.error('Error details:', error);
+                    alert('Failed to send message: ' + error.message);
+                } finally {
+                    submitButton.textContent = originalButtonText;
+                    submitButton.disabled = false;
+                }
+            });
+        };
+
+        // Initialize the chat widget
+        initChatWidget();
     });
     </script>
 
