@@ -9,7 +9,7 @@ const app = express();
 // Allow specific origins for production
 app.use(cors({
     origin: [
-        'https://artportfolio-6n78bekn2-nickgotgithubs-projects.vercel.app',
+        'https://artportfolio-fokutyrd9-nickgotgithubs-projects.vercel.app',
         'https://www.edu-prep.com',
         'http://localhost:3000'
     ],
